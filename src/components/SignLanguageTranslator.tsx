@@ -40,6 +40,7 @@ const SignLanguageTranslator: React.FC = () => {
   const [confidence, setConfidence] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(true);
+  const [selectedLanguage, setSelectedLanguage] = useState("english");
   const [detectionStats, setDetectionStats] = useState({
     totalDetections: 0,
     avgConfidence: 0,
@@ -441,7 +442,7 @@ const SignLanguageTranslator: React.FC = () => {
             </Card>
 
             {/* Enhanced Translation Output */}
-            <Card className="glass">
+            {/* <Card className="glass">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle>Smart Translation Output</CardTitle>
@@ -495,7 +496,7 @@ const SignLanguageTranslator: React.FC = () => {
                 )}
 
                 {/* Enhanced Features Info */}
-                <div className="grid grid-cols-3 gap-4 pt-4 border-t">
+                {/* <div className="grid grid-cols-3 gap-4 pt-4 border-t">
                   <div className="text-center p-3 bg-primary/5 rounded-lg">
                     <Brain className="h-6 w-6 text-primary mx-auto mb-2" />
                     <h4 className="font-semibold text-primary text-sm">AI Recognition</h4>
@@ -512,8 +513,106 @@ const SignLanguageTranslator: React.FC = () => {
                     <p className="text-xs text-muted-foreground">Advanced confidence</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </CardContent> */} 
+            {/* </Card> */}
+            {/* Enhanced Translation Output */}
+              <Card className="glass bg-gray-900 text-white">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-gray-100">Smart Translation Output</CardTitle>
+                    <div className="flex gap-2 items-center">
+                      {/* Language Dropdown */}
+                      <select
+                        className="border border-gray-600 bg-gray-800 text-gray-100 rounded-md px-2 py-1 text-sm"
+                        value={selectedLanguage}
+                        onChange={(e) => setSelectedLanguage(e.target.value)}
+                      >
+                        <option value="english">English</option>
+                        <option value="hindi">Hindi</option>
+                      </select>
+
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-gray-600 text-gray-100"
+                        onClick={() => setAudioEnabled(!audioEnabled)}
+                      >
+                        {audioEnabled ? (
+                          <Volume2 className="h-4 w-4" />
+                        ) : (
+                          <VolumeX className="h-4 w-4" />
+                        )}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-gray-600 text-gray-100"
+                        onClick={clearTranslation}
+                      >
+                        Clear
+                      </Button>
+                    </div>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="space-y-4">
+                  <div className="min-h-[200px] p-4 bg-gray-800 rounded-lg border border-gray-700">
+                    {translatedText ? (
+                      <div className="space-y-2">
+                        <p className="text-lg leading-relaxed text-gray-100">
+                          {selectedLanguage === "english"
+                            ? translatedText
+                            : "अनुवादित हिंदी टेक्स्ट"}
+                        </p>
+                        {recentGestures.length > 0 && (
+                          <div className="text-sm text-gray-400">
+                            <span>Recent sequence: </span>
+                            <span className="font-mono">{recentGestures.join(" → ")}</span>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center h-full">
+                        <p className="italic text-center text-gray-400">
+                          AI translation will appear here...<br />
+                          <span className="text-xs text-gray-500">
+                            Advanced multi-algorithm recognition active
+                          </span>
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {translatedText && (
+                    <div className="flex gap-2">
+                      <Button onClick={handleSpeak} className="flex-1 bg-gray-700 text-gray-100 hover:bg-gray-600">
+                        <Mic className="h-4 w-4 mr-2" />
+                        Speak Translation
+                      </Button>
+                    </div>
+                  )}
+
+                  {/* Enhanced Features Info */}
+                  <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-700">
+                    <div className="text-center p-3 bg-gray-700 rounded-lg">
+                      <Brain className="h-6 w-6 text-blue-400 mx-auto mb-2" />
+                      <h4 className="font-semibold text-blue-400 text-sm">AI Recognition</h4>
+                      <p className="text-xs text-gray-400">Multi-algorithm detection</p>
+                    </div>
+                    <div className="text-center p-3 bg-gray-700 rounded-lg">
+                      <Zap className="h-6 w-6 text-yellow-400 mx-auto mb-2" />
+                      <h4 className="font-semibold text-yellow-400 text-sm">Real-time</h4>
+                      <p className="text-xs text-gray-400">Live processing</p>
+                    </div>
+                    <div className="text-center p-3 bg-gray-700 rounded-lg">
+                      <Target className="h-6 w-6 text-green-400 mx-auto mb-2" />
+                      <h4 className="font-semibold text-green-400 text-sm">High Accuracy</h4>
+                      <p className="text-xs text-gray-400">Advanced confidence</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
           </div>
           </TabsContent>
 
