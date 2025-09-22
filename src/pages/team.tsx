@@ -14,9 +14,9 @@ const teamMembers = [
     {
     name: "Aman Jha",
     role: "Full Stack Developer",
-    github: "dev070903",
+    github: "amanjha-dev",
     linkedin: "https://www.linkedin.com/in/aman-jha-bba70a31b/",
-    email: "yash127pandey@gmail.com",
+    email: "jhaaman20041122@gmail.com",
     website: "",
     bio: "A passionate Full stack develpoer to create an innovative solution in the field in of Web Development"
   },
